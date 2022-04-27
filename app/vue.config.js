@@ -3,7 +3,7 @@ module.exports = {
     lintOnSave: false,
     devServer: {
         proxy: {
-            '/users': {
+            '/': {
                 target: 'http://localhost:3000',
             }
         }

@@ -3,8 +3,7 @@ import App from './App.vue'
 
 import router from '@/router'
 import store from '@/store'
-import { reqimg } from '@/api';
-reqimg();
+
 
 new Vue({
     render: h => h(App),

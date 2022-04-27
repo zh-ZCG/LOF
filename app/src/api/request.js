@@ -5,7 +5,7 @@ import nprogress from "nprogress";
 import "nprogress/nprogress.css";
 
 const requests = axios.create({
-    baseURL: '/users',
+    baseURL: 'http://localhost:3000/api',
     //请求超时时间
     timeout: 5000,
 });

@@ -151,7 +151,7 @@ html {
 }
 
 a:link:hover {
-    color: rgb(79, 76, 212) !important;
+    /* color: rgb(79, 76, 212) !important; */
     text-decoration: underline;
 }
 

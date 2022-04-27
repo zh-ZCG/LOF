@@ -1,6 +1,7 @@
 <template>
   <header class="header">
     <!--头部第一行 搜索区域-->
+    <div class="fengexian" style="border-bottom: 2px solid"></div>
     <div class="headerbox">
       <div class="headercenter wrapper">
         <h1 class="loflogo">
@@ -27,57 +28,57 @@
         </div>
         <ul class="jijiedaohang wrapper">
           <li class="buttonchun">
-            <span>春</span>
+            <span>{{ categoryList[0].categoryName }}</span>
             <ul>
-              <li>水仙花</li>
-              <li>君子兰</li>
-              <li>牡丹花</li>
-              <li>玫瑰花</li>
-              <li>百合花</li>
-              <li>郁金香</li>
-              <li>丁香花</li>
+              <li
+                v-for="(c1, index) in categoryList[0].categoryChild"
+                :key="c1.categoryChildID"
+              >
+                {{ categoryList[0].categoryChild[index].categoryChildName }}
+              </li>
             </ul>
           </li>
           <li class="buttonxia">
-            <span>夏</span>
+            <span>{{ categoryList[1].categoryName }}</span>
             <ul>
-              <li>栀子花</li>
-              <li>向日葵</li>
-              <li>千日红</li>
-              <li>荷花</li>
-              <li>茉莉花</li>
+              <li
+                v-for="(c1, index) in categoryList[1].categoryChild"
+                :key="c1.categoryChildID"
+              >
+                {{ categoryList[1].categoryChild[index].categoryChildName }}
+              </li>
             </ul>
           </li>
           <li class="buttonqiu">
-            <span>秋</span>
+            <span>{{ categoryList[2].categoryName }}</span>
             <ul>
-              <li>菊花</li>
-              <li>雁来红</li>
-              <li>紫茉莉</li>
-              <li>芙蓉花</li>
-              <li>秋海棠</li>
+              <li
+                v-for="(c1, index) in categoryList[2].categoryChild"
+                :key="c1.categoryChildID"
+              >
+                {{ categoryList[2].categoryChild[index].categoryChildName }}
+              </li>
             </ul>
           </li>
           <li class="buttondong">
-            <span>冬</span>
+            <span>{{ categoryList[3].categoryName }}</span>
             <ul>
-              <li>南天竹</li>
-              <li>水仙花</li>
-              <li>四季海棠</li>
-              <li>春鹃</li>
-              <li>春兰</li>
-              <li>一品红</li>
-              <li>山茶花</li>
+              <li
+                v-for="(c1, index) in categoryList[3].categoryChild"
+                :key="c1.categoryChildID"
+              >
+                {{ categoryList[3].categoryChild[index].categoryChildName }}
+              </li>
             </ul>
           </li>
         </ul>
       </div>
     </div>
-    <div class="fengexian" style="border-bottom: 2px solid"></div>
   </header>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   methods: {
     goSearch() {
@@ -89,6 +90,14 @@ export default {
     gogowuche() {
       this.$router.push("./login");
     },
+  },
+  mounted() {
+    this.$store.dispatch("categoryList");
+  },
+  computed: {
+    ...mapState({
+      categoryList: (state) => state.home.categoryList,
+    }),
   },
 };
 </script>
@@ -202,7 +211,7 @@ export default {
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
         width: 800px;
-        position: fixed;
+        position: absolute;
         .buttonchun {
           width: 200px;
           height: 50px;
