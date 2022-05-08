@@ -1,110 +1,231 @@
 <template>
-  <header class="header">
-    <!--头部第一行 搜索区域-->
-    <div class="fengexian" style="border-bottom: 2px solid"></div>
-    <div class="headerbox">
-      <div class="headercenter wrapper">
-        <h1 class="loflogo">
-          <router-link title="花语" to="/home">
-            <img src="./images/betweenlof.png" alt="" />
-          </router-link>
-        </h1>
-        <div class="loftitle">Language Of Flower</div>
-        <div class="yonghu">
-          <button @click="goLogin" title="用户" class="yonghulogo">
-            <img src="./images/yonghu.png" alt="" />
-          </button>
+  <div>
+    <header class="header">
+      <!--头部第一行 搜索区域-->
+      <div class="fengexian" style="border-bottom: 2px solid"></div>
+      <div class="kuodaheader"></div>
+      <div class="headerbox">
+        <div class="headercenter wrapper">
+          <h1 class="loflogo">
+            <router-link title="花语" to="/home">
+              <img src="./images/betweenlof.png" alt="" />
+            </router-link>
+          </h1>
+          <div class="loftitle">Language Of Flower</div>
+          <div class="yonghu" v-if="!userphone">
+            <button @click="goLogin" title="用户" class="yonghulogo">
+              <img src="./images/yonghu.png" alt="" />
+            </button>
+          </div>
+          <div class="yonghu" v-else>
+            <div class="tuichu" @click="logout">退出</div>
+            <button @click="yonghuzhongxin" title="用户" class="yonghulogo">
+              <img src="./images/yonghu.png" alt="" />
+            </button>
+          </div>
+          <div class="gouwuche">
+            <button @click="gogowuche" title="购物车" class="gouwuchelogo">
+              <img src="./images/gouwuche.png" alt="" />
+            </button>
+          </div>
+          <div class="searchArea" title="搜索">
+            <input
+              @click="xuanzhong"
+              v-model="keyword"
+              type="text"
+              id="xzipt"
+              class="search-input"
+            />
+            <button @click="goSearch" class="search-button">
+              <img src="./images/sosuo.png" alt="" />
+            </button>
+          </div>
+          <ul class="jijiedaohang wrapper" @click="gosearch">
+            <li class="buttonchun" v-if="categoryList[0]">
+              <span
+                :data-categoryName="categoryList[0].categoryName"
+                :data-categoryID="categoryList[0].categoryID"
+                >{{ categoryList[0].categoryName }}</span
+              >
+              <ul>
+                <li
+                  v-for="(c1, index) in categoryList[0].categoryChild"
+                  :key="c1.categoryChildID"
+                  :data-categoryChildName="
+                    categoryList[0].categoryChild[index].categoryChildName
+                  "
+                  :data-categoryChildID="
+                    categoryList[0].categoryChild[index].categoryChildID
+                  "
+                >
+                  {{ categoryList[0].categoryChild[index].categoryChildName }}
+                </li>
+              </ul>
+            </li>
+            <li class="buttonxia" v-if="categoryList[1]">
+              <span
+                :data-categoryName="categoryList[1].categoryName"
+                :data-categoryID="categoryList[1].categoryID"
+                >{{ categoryList[1].categoryName }}</span
+              >
+              <ul>
+                <li
+                  v-for="(c1, index) in categoryList[1].categoryChild"
+                  :key="c1.categoryChildID"
+                  :data-categoryChildName="
+                    categoryList[1].categoryChild[index].categoryChildName
+                  "
+                  :data-categoryChildID="
+                    categoryList[1].categoryChild[index].categoryChildID
+                  "
+                >
+                  {{ categoryList[1].categoryChild[index].categoryChildName }}
+                </li>
+              </ul>
+            </li>
+            <li class="buttonqiu" v-if="categoryList[2]">
+              <span
+                :data-categoryName="categoryList[2].categoryName"
+                :data-categoryID="categoryList[2].categoryID"
+                >{{ categoryList[2].categoryName }}</span
+              >
+              <ul>
+                <li
+                  v-for="(c1, index) in categoryList[2].categoryChild"
+                  :key="c1.categoryChildID"
+                  :data-categoryChildName="
+                    categoryList[2].categoryChild[index].categoryChildName
+                  "
+                  :data-categoryChildID="
+                    categoryList[2].categoryChild[index].categoryChildID
+                  "
+                >
+                  {{ categoryList[2].categoryChild[index].categoryChildName }}
+                </li>
+              </ul>
+            </li>
+            <li class="buttondong" v-if="categoryList[3]">
+              <span
+                :data-categoryName="categoryList[3].categoryName"
+                :data-categoryID="categoryList[3].categoryID"
+                >{{ categoryList[3].categoryName }}</span
+              >
+              <ul>
+                <li
+                  v-for="(c1, index) in categoryList[3].categoryChild"
+                  :key="c1.categoryChildID"
+                  :data-categoryChildName="
+                    categoryList[3].categoryChild[index].categoryChildName
+                  "
+                  :data-categoryChildID="
+                    categoryList[3].categoryChild[index].categoryChildID
+                  "
+                >
+                  {{ categoryList[3].categoryChild[index].categoryChildName }}
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
-        <div class="gouwuche">
-          <button @click="gogowuche" title="购物车" class="gouwuchelogo">
-            <img src="./images/gouwuche.png" alt="" />
-          </button>
-        </div>
-        <div class="searchArea" title="搜索">
-          <input type="text" class="search-input" />
-          <button @click="goSearch" class="search-button">
-            <img src="./images/sosuo.png" alt="" />
-          </button>
-        </div>
-        <ul class="jijiedaohang wrapper">
-          <li class="buttonchun">
-            <span>{{ categoryList[0].categoryName }}</span>
-            <ul>
-              <li
-                v-for="(c1, index) in categoryList[0].categoryChild"
-                :key="c1.categoryChildID"
-              >
-                {{ categoryList[0].categoryChild[index].categoryChildName }}
-              </li>
-            </ul>
-          </li>
-          <li class="buttonxia">
-            <span>{{ categoryList[1].categoryName }}</span>
-            <ul>
-              <li
-                v-for="(c1, index) in categoryList[1].categoryChild"
-                :key="c1.categoryChildID"
-              >
-                {{ categoryList[1].categoryChild[index].categoryChildName }}
-              </li>
-            </ul>
-          </li>
-          <li class="buttonqiu">
-            <span>{{ categoryList[2].categoryName }}</span>
-            <ul>
-              <li
-                v-for="(c1, index) in categoryList[2].categoryChild"
-                :key="c1.categoryChildID"
-              >
-                {{ categoryList[2].categoryChild[index].categoryChildName }}
-              </li>
-            </ul>
-          </li>
-          <li class="buttondong">
-            <span>{{ categoryList[3].categoryName }}</span>
-            <ul>
-              <li
-                v-for="(c1, index) in categoryList[3].categoryChild"
-                :key="c1.categoryChildID"
-              >
-                {{ categoryList[3].categoryChild[index].categoryChildName }}
-              </li>
-            </ul>
-          </li>
-        </ul>
       </div>
-    </div>
-  </header>
+    </header>
+  </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import throttle from "lodash/throttle";
 export default {
+  data() {
+    return {
+      keyword: "",
+    };
+  },
   methods: {
     goSearch() {
-      this.$router.push("./search");
+      if (this.$route.query) {
+        let loction = {
+          name: "search",
+          params: { keyword: this.keyword || undefined },
+        };
+        loction.query = this.$route.query;
+        this.$router.push(loction);
+      }
+    },
+    async logout(){
+        try {
+            await this.$store.dispatch('userLogout');
+            this.$router.push('/home');
+        } catch (error) {
+            
+        }
+        
+    },
+    gosearch(event) {
+      let element = event.target;
+      let { categoryname, categoryid, categorychildname, categorychildid } =
+        element.dataset;
+      let location = { name: "search" };
+      if (categoryname) {
+        let query = { categoryName: categoryname };
+        query.categoryID = categoryid;
+        if (this.$route.params) {
+          location.params = {};
+          //动态给location配置对象添加query属性
+          location.query = query;
+          //路由跳转
+          this.$router.push(location);
+        }
+      } else if (categorychildname) {
+        let query = { categoryChildName: categorychildname };
+        query.categoryChildID = categorychildid;
+        if (this.$route.params) {
+          location.params = {};
+          //动态给location配置对象添加query属性
+          location.query = query;
+          //路由跳转
+          this.$router.push(location);
+        }
+      }
     },
     goLogin() {
       this.$router.push("./login");
     },
-    gogowuche() {
-      this.$router.push("./login");
+    yonghuzhongxin(){
+        this.$router.push("./center/myorder");
     },
+    gogowuche() {
+      this.$router.push("/shopcart");
+    },
+    xuanzhong() {
+      document.getElementById("xzipt").style.width = "250px";
+    },
+    changeIndex: throttle(function (index) {
+      this.currentIndex = index;
+    }, 50),
   },
   mounted() {
     this.$store.dispatch("categoryList");
+    this.$bus.$on("clear", () => {
+      this.keyword = "";
+    });
   },
   computed: {
     ...mapState({
       categoryList: (state) => state.home.categoryList,
     }),
+    userphone() {
+      return this.$store.state.user.phone;
+    },
   },
 };
 </script>
 
 <style lang=less>
 .header {
+  width: 1920px;
   height: 133px;
+  position: fixed;
   .headerbox {
     width: 1920px;
     height: 135px;
@@ -193,6 +314,20 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        .tuichu {
+          background: none;
+          width: 32px;
+          height: 18px;
+          border: none;
+          float: right;
+          background-color: #46485f;
+          color: white;
+          font-size: 10px;
+          cursor: pointer;
+          border-radius: 15px;
+          outline: none;
+          transition: 0.5s;
+        }
         .yonghulogo {
           width: 32px;
           height: 32px;
@@ -205,7 +340,7 @@ export default {
         float: left;
         font-size: 20px;
         color: white;
-        margin-left: 200px;
+        margin-left: 265px;
         display: flex;
         background-color: #6b473c;
         border-bottom-left-radius: 10px;

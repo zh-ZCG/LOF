@@ -1,12 +1,20 @@
-import { reqimg } from "@/api";
+import { reqimg, reqGetBannerList, reqGetTodayFlower } from "@/api";
 //存储数据
 const state = {
     categoryList: [],
+    bannerList: [],
+    TodayFlower: []
 };
 //修改state
 const mutations = {
-    CATEGORYLIST(state, data) {
-        state.categoryList = data;
+    CATEGORYLIST(state, categoryList) {
+        state.categoryList = categoryList;
+    },
+    GETBANNERLIST(state, bannerList) {
+        state.bannerList = bannerList;
+    },
+    GETTODAYFLOWER(state, TodayFlower) {
+        state.TodayFlower = TodayFlower;
     }
 };
 //业务逻辑，异步处理
@@ -15,6 +23,18 @@ const actions = {
         let result = await reqimg();
         if (result.code == 200) {
             commit("CATEGORYLIST", result.data);
+        }
+    },
+    async getBannerList({ commit }) {
+        let result = await reqGetBannerList();
+        if (result.code == 200) {
+            commit("GETBANNERLIST", result.data);
+        }
+    },
+    async getTodayFlower({ commit }) {
+        let result = await reqGetTodayFlower();
+        if (result.code == 200) {
+            commit("GETTODAYFLOWER", result.data);
         }
     }
 };

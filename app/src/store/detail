@@ -1,0 +1,55 @@
+import { reqGoodsInfo, reqAddOrUpdateShopCart, reqAddOrUpdateShopCart2 } from "@/api";
+import { getUUID } from '@/utils/uuid_token';
+const state = {
+    goodInfo: {},
+    uuid_token: getUUID()
+};
+const mutations = {
+    GETGOODINFO(state, goodInfo) {
+        state.goodInfo = goodInfo;
+    },
+};
+const actions = {
+    async getGoodInfo({ commit }, id) {
+        let result = await reqGoodsInfo(id);
+        if (result.code == 200) {
+            commit("GETGOODINFO", result.data);
+        }
+    },
+
+    async addOrUpdateShopCart({ commit }, { skuId, skuNum, goodstempList }) {
+        let result = await reqAddOrUpdateShopCart(skuId, skuNum, goodstempList);
+        if (result.code == 200) {
+            return "ok";
+        } else {
+            return Promise.reject(new Error("faile"));
+        }
+    },
+
+    async addOrUpdateShopCart2({ commit }, { skuId, skuNum, goodstempList,phone }) {
+        let result = await reqAddOrUpdateShopCart2(skuId, skuNum, goodstempList,phone);
+        if (result.code == 200) {
+            return "ok";
+        } else {
+            return Promise.reject(new Error("faile"));
+        }
+    },
+
+};
+const getters = {
+    skuInfo(state) {
+        return state.goodInfo.skuInfo || {};
+    },
+    spuSaleAttrList(state) {
+        return state.goodInfo.spuSaleAttrList || [];
+    },
+    uuid_token(state) {
+        return state.uuid_token;
+    }
+};
+export default {
+    state,
+    actions,
+    mutations,
+    getters,
+};

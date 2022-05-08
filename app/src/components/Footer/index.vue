@@ -15,47 +15,48 @@
           <img src="./images/github.png" alt="" />
         </a>
       </div>
-      <div class="footerfengexian wrapper" style="border-bottom: 2px solid">
-        <div class="footer-menu wrapper">
-          <div class="footerbigtext1">
-            <h3>关于我们</h3>
-            <ul>
-              <li>
-                <a href="https://baidu.com/">微信</a>
-              </li>
-              <li>
-                <a href="https://themefisher.com/hugo-themes/">企业公众号</a>
-              </li>
-              <li>
-                <a href="https://themefisher.com/premium-templates/">地址</a>
-              </li>
-            </ul>
-          </div>
-          <div class="footerbigtext2">
-            <h3>联系我们</h3>
-            <ul>
-              <li>
-                <a href="https://docs.themefisher.com">电话</a>
-              </li>
-              <li>
-                <a href="https://baidu.com">加入我们</a>
-              </li>
-              <li>
-                <a href="https://github.com/zh-ZCG/LOF">GitHub地址</a>
-              </li>
-            </ul>
-          </div>
-          <div class="footerbigtext3">
-            <h3>售后服务</h3>
-            <ul>
-              <li>
-                <a href="https://themefisher.com/privacy-policy/">注意事项</a>
-              </li>
-              <li>
-                <a href="https://themefisher.com/privacy-policy/">作者微信</a>
-              </li>
-            </ul>
-          </div>
+    </div>
+    <div class="footerfengexian" style="border-bottom: 2px solid"></div>
+    <div class="footerbody">
+      <div class="footer-menu wrapper">
+        <div class="footerbigtext1">
+          <h3>关于我们</h3>
+          <ul>
+            <li>
+              <a href="https://github.com/zh-ZCG/LOF">微信</a>
+            </li>
+            <li>
+              <a href="https://github.com/zh-ZCG/LOF">企业公众号</a>
+            </li>
+            <li>
+              <a href="https://github.com/zh-ZCG/LOF">地址</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footerbigtext2">
+          <h3>联系我们</h3>
+          <ul>
+            <li>
+              <a href="https://github.com/zh-ZCG/LOF">电话</a>
+            </li>
+            <li>
+              <a href="https://github.com/zh-ZCG/LOF">加入我们</a>
+            </li>
+            <li>
+              <a href="https://github.com/zh-ZCG/LOF">GitHub地址</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footerbigtext3">
+          <h3>售后服务</h3>
+          <ul>
+            <li>
+              <a href="https://github.com/zh-ZCG/LOF">注意事项</a>
+            </li>
+            <li>
+              <a href="https://github.com/zh-ZCG/LOF">作者微信</a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -74,6 +75,7 @@ export default {
 
 <style lang=less>
 .footer {
+  float: left;
   height: 300px;
   background: #1a1d2d;
   padding: 20px 0;
@@ -82,12 +84,11 @@ export default {
 
 .footercenter {
   float: left;
-  width: 1920px;
+  width: 1900px;
   margin: 0, auto;
-  height: 100%;
+  height: 80px;
   display: flex;
   justify-content: center;
-  position: relative;
 }
 
 .github {
@@ -100,7 +101,6 @@ export default {
   border-radius: 25px;
   display: flex;
   justify-content: space-between;
-  position: relative;
   .yonghulogo {
     width: 32px;
     height: 32px;
@@ -127,19 +127,23 @@ export default {
   border: none;
   cursor: pointer;
 }
-.footerfengexian {
+.footerbody {
   float: left;
-  position: absolute;
-  margin-top: 100px;
+  width: 1920px;
+  height: 100px;
+}
+.footerfengexian {
+  width: 1200px;
   color: white;
+  display: flex;
+  margin-left: 360px;
 }
 .footer-menu {
   float: left;
   height: 75px;
   margin-top: 40px;
+  margin-left: 510px;
   display: flex;
-  justify-content: center;
-  position: absolute;
   background-color: #1a1d2d;
 }
 .footerbigtext1 {

@@ -2,7 +2,11 @@
 import axios from "axios";
 //引入进度条
 import nprogress from "nprogress";
+
+import store from '@/store';
+
 import "nprogress/nprogress.css";
+
 
 const requests = axios.create({
     baseURL: 'http://localhost:3000/api',
@@ -14,6 +18,14 @@ const requests = axios.create({
 requests.interceptors.request.use((config) => {
     //config当中包含请求头headers
     //进度条开始
+    if (store.state.detail.uuid_token) {
+        config.headers.userTempId = store.state.detail.uuid_token;
+    }
+
+    if (store.state.user.token) {
+        config.headers.token = store.state.user.token;
+    }
+
     nprogress.start();
     return config;
 });
