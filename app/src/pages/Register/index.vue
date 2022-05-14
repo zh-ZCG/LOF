@@ -5,7 +5,7 @@
       <h3>
         注册新用户
         <span class="go"
-          >我有账号，去 <a href="login.html" target="_blank">登陆</a>
+          >我有账号，去<router-link target="_blank" to="/login">登陆</router-link>
         </span>
       </h3>
       <div class="content">

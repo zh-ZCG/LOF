@@ -7,15 +7,15 @@
         <!-- 左侧放大镜区域 -->
         <div class="previewWrap">
           <!--放大镜效果-->
-          <Zoom :skuDefaultImg="skuDefaultImg" />
+          <Zoom :skuDefaultImg="skuInfo[0].skuDefaultImg" v-if="skuInfo[0]" />
         </div>
         <!-- 右侧选择区域布局 -->
         <div class="InfoWrap">
           <div class="goodsDetail">
-            <h3 class="InfoName">
-              {{ skuInfo.skuName }}
+            <h3 class="InfoName" v-if="skuInfo[0]">
+              {{ skuInfo[0].skuName }}
             </h3>
-            <p class="news">{{ skuInfo.skuDesc }}</p>
+            <p class="news" v-if="skuInfo[0]">{{ skuInfo[0].skuDesc }}</p>
             <div class="priceArea">
               <div class="priceArea1">
                 <div class="title">
@@ -23,7 +23,7 @@
                 </div>
                 <div class="price">
                   <i>¥</i>
-                  <em>{{ skuInfo.price }}</em>
+                  <em v-if="skuInfo[0]">{{ skuInfo[0].price }}</em>
                 </div>
               </div>
               <div class="priceArea2">
@@ -31,17 +31,16 @@
                   <i>促&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;销</i>
                 </div>
                 <div class="fixWidth">
-                  <i class="red-bg">加价购</i>
+                  <i class="red-bg">注意</i>
                   <em class="t-gray"
-                    >满999.00另加20.00元，或满1999.00另加30.00元，或满2999.00另加40.00元，即可在购物车换购热销商品</em
+                    >新店营业没有优惠，爱买不买</em
                   >
                 </div>
               </div>
             </div>
             <div class="support">
               <div class="supportArea">
-                <div class="title">地 址：</div>
-                <div class="fixWidth">广东省 深圳市 宝安区</div>
+                <div class="fixWidth"></div>
               </div>
             </div>
           </div>
@@ -156,11 +155,11 @@ export default {
     },
     async addShopcart() {
       try {
-        this.goodstempList.id = this.skuInfo.id;
-        this.goodstempList.price = this.skuInfo.price;
-        this.goodstempList.skuDefaultImg = this.skuInfo.skuDefaultImg;
-        this.goodstempList.skuName = this.skuInfo.skuName;
-        this.goodstempList.skuDesc = this.skuInfo.skuDesc;
+        this.goodstempList.id = this.skuInfo[0].id;
+        this.goodstempList.price = this.skuInfo[0].price;
+        this.goodstempList.skuDefaultImg = this.skuInfo[0].skuDefaultImg;
+        this.goodstempList.skuName = this.skuInfo[0].skuName;
+        this.goodstempList.skuDesc = this.skuInfo[0].skuDesc;
         this.goodstempList.userId = this.uuid_token;
 
         if (this.$store.state.user.phone) {

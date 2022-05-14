@@ -5,6 +5,7 @@ import qs from 'qs';
 export const reqimg = () => requests({ url: '/jijiedaohang', method: 'get' });
 
 export const reqGetBannerList = () => mockRequests({ url: '/banner', method: 'get' });
+
 export const reqGetTodayFlower = () => mockRequests({ url: '/TodayFlower', method: 'get' });
 
 export const reqGetSearchdata = (params) => requests({ url: '/searchdatatest', method: 'post', data: params })

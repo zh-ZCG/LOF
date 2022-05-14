@@ -37,7 +37,7 @@
           class="list clearFix"
           v-for="(order, index) in orderInfo"
           :key="index"
-          v-if="order.isChecked === 1"
+          v-if="order.isChecked == 1"
         >
           <li>
             <img

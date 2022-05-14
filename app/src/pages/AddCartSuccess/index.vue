@@ -5,19 +5,19 @@
       <div class="goods">
         <div class="left-good">
           <div class="left-pic">
-            <img :src="skuInfo.skuDefaultImg" />
+            <img :src="skuInfo[0].skuDefaultImg" />
           </div>
           <div class="right-info">
             <p class="title">
-              {{ skuInfo.skuName }}
+              {{ skuInfo[0].skuName }}
             </p>
             <p class="attr">
-              {{ skuInfo.skuDesc }} 数量：{{ $route.query.skuNum }}
+              {{ skuInfo[0].skuDesc }} 数量：{{ $route.query.skuNum }}
             </p>
           </div>
         </div>
         <div class="right-gocart">
-          <router-link class="sui-btn btn-xlarge" :to="`/detail/${skuInfo.id}`"
+          <router-link class="sui-btn btn-xlarge" :to="`/detail/${skuInfo[0].id}`"
             >查看商品详情</router-link
           >
           <router-link to="/shopcart"
